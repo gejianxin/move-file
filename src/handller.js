@@ -42,6 +42,25 @@ function moveFileByName(srcPath, destPath) {
   });
 }
 
+function moveFileByNameAndPrefix(srcPath, destPath) {
+  getFileName(destPath).then((files) => {
+    files.forEach((file) => {
+
+    });
+  });
+  getFileName(srcPath).then((files) => {
+    files.forEach((file) => {
+      const newPath = path.resolve(destPath, path.parse(file).name);
+      const srcFile = path.resolve(srcPath, file);
+      fs.rename(srcFile, path.resolve(newPath, file), () => {
+        console.log('File has been moved.');
+      });
+    });
+  }).catch((error) => {
+    console.log(error.message);
+  });
+}
+
 function moveToFolderByName(srcPath, destPath) {
   const names = getFileName(srcPath);
   createFolderByName(destPath, destPath);
